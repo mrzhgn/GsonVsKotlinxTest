@@ -42,6 +42,7 @@ data class TypeCInstance(
 ) : BaseGenericInstance<TypeCData>()
 
 @KSerializable
+@SerialName("unknown")
 data class UnknownInstance(
     @Transient
     override val instanceType: InstanceType = InstanceType.UNKNOWN,
