@@ -1,0 +1,41 @@
+{
+  "string": "!!!",
+  "data": {
+    "string1": "!!!",
+    "string2": "!!!",
+    "data1": {
+      "obj1": {
+        "string": "!!!",
+        "int": 1,
+        "boolean": true
+      },
+      "obj2": {
+        "string": "!!!",
+        "int": 1,
+        "boolean": true
+      },
+      "obj3": {
+        "string": "!!!",
+        "int": 1,
+        "boolean": true
+      }
+    },
+    "data2": {
+      "obj1": {
+        "string": "!!!",
+        "int": 1,
+        "boolean": true
+      },
+      "obj2": {
+        "string": "!!!",
+        "int": 1,
+        "boolean": true
+      },
+      "obj3": {
+        "string": "!!!",
+        "int": 1,
+        "boolean": true
+      }
+    }
+  }
+}
