@@ -12,30 +12,27 @@ import kotlinx.serialization.modules.subclass
 import java.math.BigDecimal
 import java.time.OffsetDateTime
 
-class KotlinxJsonFactory {
+object KotlinxJsonFactory {
 
-    companion object {
-
-        @OptIn(ExperimentalSerializationApi::class)
-        fun provideKotlinxJsonInstance(): Json {
-            return Json {
-                serializersModule = serializersModule.overwriteWith(
-                    SerializersModule {
-                        contextual(BigDecimal::class, BigDecimalSerializer())
-                        contextual(OffsetDateTime::class, OffsetDateTimeSerializer())
-                        polymorphic(BaseGenericInstance::class) {
-                            subclass(TypeAInstance::class)
-                            subclass(TypeBInstance::class)
-                            subclass(TypeCInstance::class)
-                            default { UnknownInstance.serializer() }
-                        }
+    @OptIn(ExperimentalSerializationApi::class)
+    fun provideKotlinxJsonInstance(): Json {
+        return Json {
+            serializersModule = serializersModule.overwriteWith(
+                SerializersModule {
+                    contextual(BigDecimal::class, BigDecimalSerializer())
+                    contextual(OffsetDateTime::class, OffsetDateTimeSerializer())
+                    polymorphic(BaseGenericInstance::class) {
+                        subclass(TypeAInstance::class)
+                        subclass(TypeBInstance::class)
+                        subclass(TypeCInstance::class)
+                        default { UnknownInstance.serializer() }
                     }
-                )
-                coerceInputValues = true
-                ignoreUnknownKeys = true
-                explicitNulls = false
-                isLenient = true
-            }
+                }
+            )
+            coerceInputValues = true
+            ignoreUnknownKeys = true
+            explicitNulls = false
+            isLenient = true
         }
     }
 }

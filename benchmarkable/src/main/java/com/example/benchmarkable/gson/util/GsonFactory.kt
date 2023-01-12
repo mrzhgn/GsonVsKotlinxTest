@@ -8,24 +8,21 @@ import com.google.gson.GsonBuilder
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory
 import java.time.OffsetDateTime
 
-class GsonFactory {
+object GsonFactory {
 
-    companion object {
-        fun provideGsonInstance(): Gson {
-            return GsonBuilder()
-                .registerTypeAdapterFactory(SafeEnumTypeAdapterFactory())
-                .registerTypeAdapterFactory(
-                    RuntimeTypeAdapterFactory.of(
-                        BaseGenericInstance::class.java,
-                        "instanceType",
-                        true
-                    )
-                        .registerSubtype(TypeAInstance::class.java, InstanceType.TYPE_A.jsonType)
-                        .registerSubtype(TypeBInstance::class.java, InstanceType.TYPE_B.jsonType)
-                        .registerSubtype(TypeCInstance::class.java, InstanceType.TYPE_C.jsonType)
-                )
-                .registerTypeAdapter(OffsetDateTime::class.java, OffsetDateTimeDeserializer())
-                .create()
-        }
+    fun provideGsonInstance(): Gson {
+        return GsonBuilder()
+            .registerTypeAdapterFactory(SafeEnumTypeAdapterFactory())
+            .registerTypeAdapterFactory(
+                RuntimeTypeAdapterFactory.of(
+                    BaseGenericInstance::class.java,
+                    "instanceType",
+                    true)
+                    .registerSubtype(TypeAInstance::class.java, InstanceType.TYPE_A.jsonType)
+                    .registerSubtype(TypeBInstance::class.java, InstanceType.TYPE_B.jsonType)
+                    .registerSubtype(TypeCInstance::class.java, InstanceType.TYPE_C.jsonType)
+            )
+            .registerTypeAdapter(OffsetDateTime::class.java, OffsetDateTimeDeserializer())
+            .create()
     }
 }
