@@ -1,9 +1,6 @@
 package com.example.benchmarkable.kotlinx.serializer
 
-import com.example.benchmarkable.kotlinx.util.ExamplePayloadSerializable
-import com.example.benchmarkable.model.payload.ErrorResponse
-import com.example.benchmarkable.model.payload.ResponsePayload
-import com.example.benchmarkable.model.payload.ResponseStatus
+import com.example.benchmarkable.model.payload.*
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
@@ -30,10 +27,6 @@ class ResponsePayloadSerializer<T>(private val payloadSerializer: KSerializer<T>
             "status",
             PrimitiveSerialDescriptor("status", PrimitiveKind.STRING)
         )
-        element(
-            "message",
-            PrimitiveSerialDescriptor("message", PrimitiveKind.STRING)
-        )
     }
 
     override fun serialize(encoder: Encoder, value: ResponsePayload<*>) {
@@ -50,38 +43,23 @@ class ResponsePayloadSerializer<T>(private val payloadSerializer: KSerializer<T>
             ResponseStatus.serializer(),
             searchField("status", jsonObject)
         )
-        val defaultMessage = descriptor.annotations
-            .filterIsInstance<ExamplePayloadSerializable>()
-            .first()
-            .defaultMessage
-
-        val responseMessage = jsonObject["message"]?.jsonPrimitive?.contentOrNull ?: defaultMessage
 
         return when (responseStatus) {
             ResponseStatus.OK -> {
                 decoder.json.decodeFromJsonElement(payloadSerializer, payloadJson).let {
-                    ResponsePayload(
+                    SuccessPayload(
                         payload = it,
-                        status = responseStatus,
-                        message = responseMessage
+                        status = responseStatus
                     )
                 }
             }
             ResponseStatus.ERROR -> {
                 decoder.json.decodeFromJsonElement(ErrorResponse.serializer(), payloadJson).let {
-                    ResponsePayload(
+                    ErrorPayload(
                         payload = it,
-                        status = responseStatus,
-                        message = responseMessage
+                        status = responseStatus
                     )
                 }
-            }
-            ResponseStatus.UNKNOWN -> {
-                ResponsePayload(
-                    payload = null,
-                    status = responseStatus,
-                    message = responseMessage
-                )
             }
         }
     }

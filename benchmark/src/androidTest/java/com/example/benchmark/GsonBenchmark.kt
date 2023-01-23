@@ -36,8 +36,8 @@ class GsonBenchmark {
 
     @Test
     fun measureLinearInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.simplelinear)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.simplelinear)
             val data = gson.fromJson(src, LinearInstance::class.java)
             runWithTimingDisabled {
                 assertEquals("!!!", data?.string1)
@@ -47,8 +47,8 @@ class GsonBenchmark {
 
     @Test
     fun measureNestingInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.simplenesting)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.simplenesting)
             val data = gson.fromJson(src, NestingInstance::class.java)
             runWithTimingDisabled {
                 assertEquals("!!!", data?.string)
@@ -58,8 +58,8 @@ class GsonBenchmark {
 
     @Test
     fun measureSmallListInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.smalllistsimple)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.smalllistsimple)
             val data = gson.fromJson(src, ListInstance::class.java)
             runWithTimingDisabled {
                 assertEquals("!!!", data?.items?.get(0)?.testItem?.string1)
@@ -69,8 +69,8 @@ class GsonBenchmark {
 
     @Test
     fun measureLargeListInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.largelistsimple)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.largelistsimple)
             val data = gson.fromJson(src, ListInstance::class.java)
             runWithTimingDisabled {
                 assertEquals("!!!", data?.items?.get(0)?.testItem?.string1)
@@ -80,8 +80,8 @@ class GsonBenchmark {
 
     @Test
     fun measureSmallGenericContainerInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.smalllistcustom)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.smalllistcustom)
             val data = gson.fromJson(src, GenericListInstance::class.java)
             runWithTimingDisabled {
                 assertEquals(
@@ -94,8 +94,8 @@ class GsonBenchmark {
 
     @Test
     fun measureLargeGenericContainerInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.largelistcustom)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.largelistcustom)
             val data = gson.fromJson(src, GenericListInstance::class.java)
             runWithTimingDisabled {
                 assertEquals(
@@ -108,8 +108,8 @@ class GsonBenchmark {
 
     @Test
     fun measureContextualInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.contextual)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.contextual)
             val data = gson.fromJson(src, ContextualInstance::class.java)
             runWithTimingDisabled {
                 assertEquals(

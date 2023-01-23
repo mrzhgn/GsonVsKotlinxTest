@@ -2,6 +2,5 @@
   "payload": {
     "someData": "Some data from backend"
   },
-  "status": "Error",
-  "message": "Some message from backend"
+  "status": "Ok"
 }

@@ -38,8 +38,8 @@ class KotlinxBenchmark {
 
     @Test
     fun measureLinearInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.simplelinear)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.simplelinear)
             val data = json.decodeFromString(LinearInstance.serializer(), src)
             runWithTimingDisabled {
                 assertEquals("!!!", data.string1)
@@ -49,8 +49,8 @@ class KotlinxBenchmark {
 
     @Test
     fun measureNestingInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.simplenesting)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.simplenesting)
             val data = json.decodeFromString(NestingInstance.serializer(), src)
             runWithTimingDisabled {
                 assertEquals("!!!", data.string)
@@ -60,8 +60,8 @@ class KotlinxBenchmark {
 
     @Test
     fun measureSmallListInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.smalllistsimple)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.smalllistsimple)
             val data = json.decodeFromString(ListInstance.serializer(), src)
             runWithTimingDisabled {
                 assertEquals("!!!", data.items[0].testItem.string1)
@@ -71,8 +71,8 @@ class KotlinxBenchmark {
 
     @Test
     fun measureLargeListInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.largelistsimple)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.largelistsimple)
             val data = json.decodeFromString(ListInstance.serializer(), src)
             runWithTimingDisabled {
                 assertEquals("!!!", data.items[0].testItem.string1)
@@ -82,8 +82,8 @@ class KotlinxBenchmark {
 
     @Test
     fun measureSmallGenericContainerInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.smalllistcustom)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.smalllistcustom)
             val data = json.decodeFromString(GenericListInstance.serializer(), src)
             runWithTimingDisabled {
                 assertEquals(
@@ -96,8 +96,8 @@ class KotlinxBenchmark {
 
     @Test
     fun measureLargeGenericContainerInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.largelistcustom)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.largelistcustom)
             val data = json.decodeFromString(GenericListInstance.serializer(), src)
             runWithTimingDisabled {
                 assertEquals(
@@ -110,8 +110,8 @@ class KotlinxBenchmark {
 
     @Test
     fun measureContextualInstanceTest() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.contextual)
         benchmarkRule.measureRepeated {
-            val src = getDataFromRawRes(BenchmarkableR.raw.contextual)
             val data = json.decodeFromString(ContextualInstance.serializer(), src)
             runWithTimingDisabled {
                 assertEquals(
@@ -132,7 +132,7 @@ class KotlinxBenchmark {
         )
         assertEquals(
             "Some data from backend",
-            data.payload?.someData
+            data.payload.someData
         )
     }
 
