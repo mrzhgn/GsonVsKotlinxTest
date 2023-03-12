@@ -10,7 +10,7 @@ import java.io.Serializable
 @KSerializable
 @JsonClassDiscriminator(discriminator = "instanceType")
 @OptIn(ExperimentalSerializationApi::class)
-sealed class BaseGenericInstance<T : BaseInstanceData> : Serializable {
+sealed class BaseInstance<T : BaseInstanceData> : Serializable {
 
     abstract val instanceType: InstanceType
 
@@ -23,7 +23,7 @@ data class TypeAInstance(
     @Transient
     override val instanceType: InstanceType = InstanceType.TYPE_A,
     override val data: TypeAData?
-) : BaseGenericInstance<TypeAData>()
+) : BaseInstance<TypeAData>()
 
 @KSerializable
 @SerialName("typeb")
@@ -31,7 +31,7 @@ data class TypeBInstance(
     @Transient
     override val instanceType: InstanceType = InstanceType.TYPE_B,
     override val data: TypeBData?
-) : BaseGenericInstance<TypeBData>()
+) : BaseInstance<TypeBData>()
 
 @KSerializable
 @SerialName("typec")
@@ -39,7 +39,7 @@ data class TypeCInstance(
     @Transient
     override val instanceType: InstanceType = InstanceType.TYPE_C,
     override val data: TypeCData?
-) : BaseGenericInstance<TypeCData>()
+) : BaseInstance<TypeCData>()
 
 @KSerializable
 @SerialName("unknown")
@@ -48,4 +48,4 @@ data class UnknownInstance(
     override val instanceType: InstanceType = InstanceType.UNKNOWN,
     @Transient
     override val data: UnknownData? = null
-) : BaseGenericInstance<UnknownData>()
+) : BaseInstance<UnknownData>()

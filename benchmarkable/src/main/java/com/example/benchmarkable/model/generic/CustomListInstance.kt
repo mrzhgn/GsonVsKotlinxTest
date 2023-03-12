@@ -4,11 +4,11 @@ import kotlinx.serialization.Serializable as KSerializable
 import java.io.Serializable
 
 @KSerializable
-data class GenericListInstance(
-    val items: List<GenericContainerInstance>,
+data class CustomListInstance(
+    val items: List<CustomContainerInstance>,
 ) : Serializable
 
 @KSerializable
-data class GenericContainerInstance(
-    val testItem: BaseInstance<*>
+data class CustomContainerInstance(
+    val testItem: CustomInstance<*>
 ) : Serializable

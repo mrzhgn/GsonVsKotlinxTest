@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.benchmarkable.kotlinx.util.KotlinxJsonFactory
 import com.example.benchmarkable.model.contextual.ContextualInstance
+import com.example.benchmarkable.model.generic.CustomListInstance
 import com.example.benchmarkable.model.generic.GenericListInstance
 import com.example.benchmarkable.model.generic.InstanceType
 import com.example.benchmarkable.model.payload.ExampleResponse
@@ -121,6 +122,16 @@ class KotlinxBenchmark {
                 )
             }
         }
+    }
+
+    @Test
+    fun testCustomContainerInstance() {
+        val src = getDataFromRawRes(BenchmarkableR.raw.smalllistcustom)
+        val data = json.decodeFromString(CustomListInstance.serializer(), src)
+        assertEquals(
+            InstanceType.TYPE_A,
+            data.items[0].testItem.instanceType
+        )
     }
 
     @Test

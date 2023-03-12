@@ -21,7 +21,7 @@ object KotlinxJsonFactory {
                 SerializersModule {
                     contextual(BigDecimal::class, BigDecimalSerializer())
                     contextual(OffsetDateTime::class, OffsetDateTimeSerializer())
-                    polymorphic(BaseGenericInstance::class) {
+                    polymorphic(BaseInstance::class) {
                         subclass(TypeAInstance::class)
                         subclass(TypeBInstance::class)
                         subclass(TypeCInstance::class)
